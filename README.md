@@ -1,2 +1,2 @@
 # poo-sorteio
-Primeiro projeto da disciplina de PRogramação Orientada a Objetos
+Primeiro projeto da disciplina de Programação Orientada a Objetos
