@@ -1,4 +1,8 @@
-import sorteio.Sorteio;
+/*
+  Felipe Galdino de Sousa
+  Ítalo Alixandre Alves
+*/
+
 import tests.Tela;
 import tests.Teste1;
 import tests.Teste2;

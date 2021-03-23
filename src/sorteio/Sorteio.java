@@ -1,3 +1,8 @@
+/*
+  Felipe Galdino de Sousa
+  Ítalo Alixandre Alves
+*/
+
 package sorteio;
 
 import java.util.ArrayList;
