@@ -2,10 +2,9 @@
   Felipe Galdino de Sousa
   Ítalo Alixandre Alves
 */
-
 package sorteio;
 
-import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Random;
 
 public class Sorteio {
@@ -15,15 +14,12 @@ public class Sorteio {
     private int max;
     private int step;
 
-    private final ArrayList<Integer> bau = new ArrayList<>();
-
-    private final Random randomGen;
-
     public Sorteio(int n, int min, int max) {
         if(n <= 0 || n > 100)
             throw new IllegalArgumentException("n precisa estar entre 0 e 100");
         if(min < 0 || min > max)
             throw new IllegalArgumentException("min e max precisam ser maior que zero e min menor que max");
+        if(max-min < n-1) throw new IllegalArgumentException("o intervalo min e max precisa ser maior ou igual a n");
 
         this.n = n;
         this.min = min;
@@ -31,20 +27,15 @@ public class Sorteio {
         this.step = 0;
 
         this.numeros = new int[n];
-
-        this.randomGen = new Random();
-
-        for(int i = this.min; i <= this.max; i++) {
-            this.bau.add(i);
-        }
     }
 
     private int novoNumeroBau() {
-        return this.randomGen.nextInt(this.bau.size());
+        return new Random().nextInt(this.max - this.min + 1) + this.min;
     }
 
     public void gerarNumeros() {
-        for(int i = this.step; i < this.n; i++) {
+        this.step = 0;
+        for(int i = 0; i < this.n; i++) {
             this.proximoNumero();
         }
     }
@@ -52,12 +43,25 @@ public class Sorteio {
     public void proximoNumero() {
         if (this.terminou()) throw new IllegalStateException("o sorteio ja terminou");
 
-        int numero = novoNumeroBau();
+        boolean inserido = false;
 
-        this.numeros[step] = this.bau.get(numero);
-        this.bau.remove(numero);
+        while(!inserido) {
+            int numero = novoNumeroBau();
+            boolean unico = true;
 
-        this.step++;
+            for(int i = 0; i < this.n; i++) {
+                if(this.numeros[i] == numero) {
+                    unico = false;
+                    break;
+                }
+            }
+
+            if(unico) {
+                this.numeros[step] = numero;
+                inserido = true;
+                this.step++;
+            }
+        }
     }
 
     public boolean terminou() {
