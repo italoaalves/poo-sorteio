@@ -39,30 +39,28 @@ public class Sorteio {
             this.proximoNumero();
         }
     }
-
-    public void proximoNumero() {
-        if (this.terminou()) throw new IllegalStateException("o sorteio ja terminou");
-
-        boolean inserido = false;
-
-        while(!inserido) {
-            int numero = novoNumeroBau();
-            boolean unico = true;
-
-            for(int i = 0; i < this.n; i++) {
-                if(this.numeros[i] == numero) {
-                    unico = false;
-                    break;
-                }
-            }
-
-            if(unico) {
-                this.numeros[step] = numero;
-                inserido = true;
-                this.step++;
-            }
-        }
-    }
+    
+    public void proximoNumero(){
+    	if (this.terminou()) throw new IllegalStateException("o sorteio ja terminou");
+		boolean existe;
+		if (step < n) {
+			int numero = novoNumeroBau();
+			existe = false;
+			for(int i = 0; i < n; i++) {
+				if(numero == this.numeros[i]) {
+					existe = true;
+				}
+			}
+			if(existe){
+				proximoNumero();
+			}
+			else{
+				this.numeros[this.step] = numero;
+				this.step ++;
+				}
+		}
+		
+	}
 
     public boolean terminou() {
         return this.step >= this.n;
@@ -73,7 +71,16 @@ public class Sorteio {
             throw new IllegalArgumentException("padrao nao pode ser null");
 
         StringBuilder resultado = new StringBuilder();
-
+        int temp;
+        for(int i = 0; i < n; i++) {
+			for(int j = 0; j < n; j++) {
+				if(numeros[i] < numeros[j]) {
+					temp = numeros[j];
+					numeros[j] = numeros[i];
+					numeros[i] = temp;
+				}
+			}
+		}
         for(int i = 0; i < this.n; i++) {
             resultado.append(this.numeros[i]);
             resultado.append((this.n - i > 1) ? padrao : "");
