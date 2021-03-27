@@ -61,7 +61,7 @@ public class Sorteio {
 		}
 		
 	}
-
+    
     public boolean terminou() {
         return this.step >= this.n;
     }
@@ -69,16 +69,18 @@ public class Sorteio {
     public String resultado(String padrao) {
         if(padrao == null)
             throw new IllegalArgumentException("padrao nao pode ser null");
-
+        
         StringBuilder resultado = new StringBuilder();
         int temp;
         for(int i = 0; i < n; i++) {
 			for(int j = 0; j < n; j++) {
-				if(numeros[i] < numeros[j]) {
-					temp = numeros[j];
-					numeros[j] = numeros[i];
-					numeros[i] = temp;
-				}
+				if(numeros[i]!= 0) {
+					if(numeros[i] < numeros[j]) {
+						temp = numeros[j];
+						numeros[j] = numeros[i];
+						numeros[i] = temp;
+					}
+				}	
 			}
 		}
         for(int i = 0; i < this.n; i++) {
