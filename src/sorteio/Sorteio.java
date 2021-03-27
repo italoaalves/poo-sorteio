@@ -68,7 +68,7 @@ public class Sorteio {
 
     public String resultado(String padrao) {
         if(padrao == null)
-            throw new IllegalArgumentException("padrao nao pode ser null");
+        	throw new IllegalArgumentException("padrao nao pode ser null");
         
         StringBuilder resultado = new StringBuilder();
         int temp;
