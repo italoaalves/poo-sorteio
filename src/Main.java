@@ -3,9 +3,9 @@
   Ítalo Alixandre Alves
 */
 
-import tests.Tela;
-import tests.Teste1;
-import tests.Teste2;
+import testes.Tela;
+import testes.Teste1;
+import testes.Teste2;
 
 public class Main {
     public static void main(String[] args) {
